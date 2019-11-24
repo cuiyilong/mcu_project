@@ -5,7 +5,7 @@
 #include "beep.h"
 #include "key.h"
 
-
+u32 display_dum = 8888;
 int main(void)
 { 
  
@@ -16,8 +16,10 @@ int main(void)
 	delay_init(168);		//延时初始化 
 	uart_init(115200);	//串口初始化波特率为115200
 	LED_Init();		  		//初始化与LED连接的硬件接口  
+	digital_tube_Init();
 	while(1)
 	{
+	#if 0
 		if(USART_RX_STA&0x8000)
 		{					   
 			len=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
@@ -41,6 +43,11 @@ int main(void)
 			if(times%30==0)LED0=!LED0;//闪烁LED,提示系统正在运行.
 			delay_ms(10);   
 		}
+    #endif
+              /* dsiplay in d-tube*/
+              digital_tube_display(display_dum);
+              //digital_tube_display_one(1,2);
+              delay_ms(1); 
 	}
 }
 
