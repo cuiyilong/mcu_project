@@ -442,6 +442,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\KEY\key.c</FilePath>
             </File>
+            <File>
+              <FileName>digital_tube.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\DIGITAL_TUBE\digital_tube.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

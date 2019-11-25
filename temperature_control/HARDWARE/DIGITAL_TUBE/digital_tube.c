@@ -45,16 +45,16 @@ void digital_tube_Init(void)
 
 
 u8 digit_select_table[5]={0, 9, 10, 11, 12}; // 6,8,9,12
-u8 num_table[16]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f};
+u8 num_table[16]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f}; 
 //PA0-PA7----A-G-D0
 #define DIGIT_BIT_NUM 8
 #define DISPLY_BITS (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 |GPIO_Pin_5 | GPIO_Pin_6)
-#define DISPLY_DIGS (GPIO_Pin_6 | GPIO_Pin_8 | GPIO_Pin_9 | GPIO_Pin_12)
+#define DISPLY_DIGS (GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12)
 
 void digital_tube_display_bit(u32 digit_bits)
 {
     GPIO_ResetBits(GPIOD, DISPLY_BITS);
-    delay_ms(1);   
+    //delay_ms(1);   
     GPIO_SetBits(GPIOD, digit_bits);
        
 }
@@ -68,7 +68,7 @@ void digital_tube_display_one(u32 digit_select, u32 display_digit)
     digital_tube_display_bit(num_table[display_digit]);
 
     GPIO_SetBits(GPIOD, DISPLY_DIGS);
-    delay_ms(1); 
+    //delay_ms(1); 
     GPIO_ResetBits(GPIOD, BIT(digit_select_table[digit_select]));
     //delay_ms(5); 
 

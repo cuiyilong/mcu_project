@@ -5,7 +5,7 @@
 #include "beep.h"
 #include "key.h"
 
-u32 display_dum = 8888;
+u32 display_num = 1234;
 int main(void)
 { 
  
@@ -17,6 +17,7 @@ int main(void)
 	uart_init(115200);	//串口初始化波特率为115200
 	LED_Init();		  		//初始化与LED连接的硬件接口  
 	digital_tube_Init();
+
 	while(1)
 	{
 	#if 0
@@ -36,18 +37,22 @@ int main(void)
 			times++;
 			if(times%5000==0)
 			{
-				printf("\r\nALIENTEK 探索者STM32F407开发板 串口实验\r\n");
-				printf("正点原子@ALIENTEK\r\n\r\n\r\n");
+				printf("\r\n5000 *10ms\r\n");
 			}
 			if(times%200==0)printf("请输入数据,以回车键结束\r\n");  
 			if(times%30==0)LED0=!LED0;//闪烁LED,提示系统正在运行.
 			delay_ms(10);   
 		}
-    #endif
-              /* dsiplay in d-tube*/
-              digital_tube_display(display_dum);
-              //digital_tube_display_one(1,2);
-              delay_ms(1); 
+        #endif
+            /* dsiplay in d-tube*/
+            digital_tube_display(display_num);
+            printf("\r\n display_num:%d\r\n", display_num);
+
+            //display_num++;
+            if(display_num > 9999)
+                display_num=0;
+
+            //delay_ms(1); 
 	}
 }
 
