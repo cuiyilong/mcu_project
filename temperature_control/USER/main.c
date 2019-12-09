@@ -18,6 +18,8 @@ int main(void)
 	LED_Init();		  		//初始化与LED连接的硬件接口  
 	digital_tube_Init();
 
+
+        max_6675_main();
 	while(1)
 	{
 	#if 0

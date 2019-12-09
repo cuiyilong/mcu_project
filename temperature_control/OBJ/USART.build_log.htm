@@ -8,72 +8,103 @@ Project File Date:  11/24/2019
 
 <h2>Output:</h2>
 Build target 'USART'
-linking...
-Program Size: Code=6444 RO-data=560 RW-data=76 ZI-data=1836  
-FromELF: creating hex file...
-"..\OBJ\USART.axf" - 0 Error(s), 0 Warning(s).
-Load "..\\OBJ\\USART.axf" 
-Set JLink Project File to "C:\Users\cuiyilong\work\code\mcu_project\temperature_control\USER\JLinkSettings.ini"
-* JLink Info: Device "STM32F407ZG" selected (1024 KB flash, 128 KB RAM).
- 
-JLink info:
-------------
-DLL: V4.80g, compiled Feb 13 2014 20:50:02
-Firmware: J-Link V9 compiled Mar 29 2018 17:46:13
-Hardware: V9.40
-S/N : 59425868 
-Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash, RDDI 
- 
-* JLink Info: Found SWD-DP with ID 0x2BA01477
-* JLink Info: Found SWD-DP with ID 0x2BA01477
-* JLink Info: Found Cortex-M4 r0p1, Little endian.
-* JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
-* JLink Info: TPIU fitted.
-* JLink Info: ETM fitted.
-ROMTableAddr = 0xE00FF003
- 
-Target info:
-------------
-Device: STM32F407ZG
-VTarget = 3.250V
-State of Pins: 
-TCK: 0, TDI: 1, TDO: 1, TMS: 1, TRES: 1, TRST: 1
-Hardware-Breakpoints: 6
-Software-Breakpoints: 8192
-Watchpoints:          4
-JTAG speed: 4000 kHz
- 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-</pre>
-</body>
-</html>
-M32F407ZG
-VTarget = 3.256V
-State of Pins: 
-TCK: 0, TDI: 1, TDO: 1, TMS: 1, TRES: 1, TRST: 1
-Hardware-Breakpoints: 6
-Software-Breakpoints: 8192
-Watchpoints:          4
-JTAG speed: 4000 kHz
- 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
--------
-Device: STM32F407ZG
-VTarget = 3.288V
-State of Pins: 
-TCK: 0, TDI: 1, TDO: 1, TMS: 1, TRES: 1, TRST: 1
-Hardware-Breakpoints: 6
-Software-Breakpoints: 8192
-Watchpoints:          4
-JTAG speed: 4000 kHz
- 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
+compiling max_6675.c...
+..\HARDWARE\MAX6675\max_6675.c(56): warning:  #188-D: enumerated type mixed with another type
+        GPIO_InitStructure.GPIO_Mode = GPIO_OType_PP;           // 推免输出
+..\HARDWARE\MAX6675\max_6675.c(119): error:  #136: struct "<unnamed>" has no field "BRR"
+                MAX6675_CSL();
+..\HARDWARE\MAX6675\max_6675.c(124): error:  #136: struct "<unnamed>" has no field "BSRR"
+                MAX6675_CSH();
+..\HARDWARE\MAX6675\max_6675.c: 1 warning, 2 errors
+"..\OBJ\USART.axf" - 2 Error(s), 1 Warning(s).
+Target not created
+.c(14): warning:  #177-D: variable "times" was declared but never referenced
+        u16 times=0;  
+main.c: 6 warnings, 0 errors
+compiling digital_tube.c...
+compiling max_6675.c...
+..\HARDWARE\MAX6675\max_6675.c(29): error:  #20: identifier "GPIO_InitTypeDef" is undefined
+        GPIO_InitTypeDef GPIO_InitStructure;
+..\HARDWARE\MAX6675\max_6675.c(30): error:  #20: identifier "SPI_InitTypeDef" is undefined
+        SPI_InitTypeDef  SPI_InitStructure;     
+..\HARDWARE\MAX6675\max_6675.c(34): warning:  #223-D: function "RCC_AHB1PeriphClockCmd" declared implicitly
+      RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//使能GPIOA时钟
+..\HARDWARE\MAX6675\max_6675.c(34): error:  #20: identifier "RCC_AHB1Periph_GPIOA" is undefined
+      RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//使能GPIOA时钟
+..\HARDWARE\MAX6675\max_6675.c(34): error:  #20: identifier "ENABLE" is undefined
+      RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);//使能GPIOA时钟
+..\HARDWARE\MAX6675\max_6675.c(35): warning:  #223-D: function "RCC_APB2PeriphClockCmd" declared implicitly
+      RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);//使能SPI1时钟
+..\HARDWARE\MAX6675\max_6675.c(35): error:  #20: identifier "RCC_APB2Periph_SPI1" is undefined
+      RCC_APB2PeriphClockCmd(RCC_APB2Periph_SPI1, ENABLE);//使能SPI1时钟
+..\HARDWARE\MAX6675\max_6675.c(42): error:  #20: identifier "GPIO_Pin_5" is undefined
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+..\HARDWARE\MAX6675\max_6675.c(42): error:  #20: identifier "GPIO_Pin_6" is undefined
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+..\HARDWARE\MAX6675\max_6675.c(42): error:  #20: identifier "GPIO_Pin_7" is undefined
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7;
+..\HARDWARE\MAX6675\max_6675.c(43): error:  #20: identifier "GPIO_Speed_50MHz" is undefined
+        GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
+..\HARDWARE\MAX6675\max_6675.c(44): error:  #20: identifier "GPIO_Mode_AF" is undefined
+        GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;                    // 复用输出
+..\HARDWARE\MAX6675\max_6675.c(45): warning:  #223-D: function "GPIO_Init" declared implicitly
+        GPIO_Init(GPIOA, &GPIO_InitStructure);
+..\HARDWARE\MAX6675\max_6675.c(45): error:  #20: identifier "GPIOA" is undefined
+        GPIO_Init(GPIOA, &GPIO_InitStructure);
+..\HARDWARE\MAX6675\max_6675.c(49): error:  #20: identifier "GPIO_Pin_4" is undefined
+        GPIO_InitStructure.GPIO_Pin = GPIO_Pin_4;
+..\HARDWARE\MAX6675\max_6675.c(51): error:  #20: identifier "GPIO_OType_PP" is undefined
+        GPIO_InitStructure.GPIO_Mode = GPIO_OType_PP;           // 推免输出
+..\HARDWARE\MAX6675\max_6675.c(53): warning:  #223-D: function "GPIO_SetBits" declared implicitly
+        GPIO_SetBits(GPIOA, GPIO_Pin_4);                                                // 先把片选拉高，真正用的时候再拉低
+..\HARDWARE\MAX6675\max_6675.c(57): error:  #20: identifier "SPI_Direction_2Lines_FullDuplex" is undefined
+        SPI_InitStructure.SPI_Direction = SPI_Direction_2Lines_FullDuplex;
+..\HARDWARE\MAX6675\max_6675.c(58): error:  #20: identifier "SPI_Mode_Master" is undefined
+        SPI_InitStructure.SPI_Mode = SPI_Mode_Master;
+..\HARDWARE\MAX6675\max_6675.c(59): error:  #20: identifier "SPI_DataSize_8b" is undefined
+        SPI_InitStructure.SPI_DataSize = SPI_DataSize_8b;
+..\HARDWARE\MAX6675\max_6675.c(60): error:  #20: identifier "SPI_CPOL_Low" is undefined
+        SPI_InitStructure.SPI_CPOL = SPI_CPOL_Low;
+..\HARDWARE\MAX6675\max_6675.c(61): error:  #20: identifier "SPI_CPHA_1Edge" is undefined
+        SPI_InitStructure.SPI_CPHA = SPI_CPHA_1Edge;
+..\HARDWARE\MAX6675\max_6675.c(62): error:  #20: identifier "SPI_NSS_Soft" is undefined
+        SPI_InitStructure.SPI_NSS = SPI_NSS_Soft;
+..\HARDWARE\MAX6675\max_6675.c(63): error:  #20: identifier "SPI_BaudRatePrescaler_8" is undefined
+        SPI_InitStructure.SPI_BaudRatePrescaler = SPI_BaudRatePrescaler_8;
+..\HARDWARE\MAX6675\max_6675.c(64): error:  #20: identifier "SPI_FirstBit_MSB" is undefined
+        SPI_InitStructure.SPI_FirstBit = SPI_FirstBit_MSB;
+..\HARDWARE\MAX6675\max_6675.c(66): warning:  #223-D: function "SPI_Init" declared implicitly
+        SPI_Init(SPI1, &SPI_InitStructure);
+..\HARDWARE\MAX6675\max_6675.c(66): error:  #20: identifier "SPI1" is undefined
+        SPI_Init(SPI1, &SPI_InitStructure);
+..\HARDWARE\MAX6675\max_6675.c(70): warning:  #223-D: function "SPI_Cmd" declared implicitly
+        SPI_Cmd(SPI1, ENABLE); 
+..\HARDWARE\MAX6675\max_6675.c(82): warning:  #223-D: function "SPI_I2S_GetFlagStatus" declared implicitly
+        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == RESET);
+..\HARDWARE\MAX6675\max_6675.c(82): error:  #20: identifier "SPI1" is undefined
+        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == RESET);
+..\HARDWARE\MAX6675\max_6675.c(82): error:  #20: identifier "SPI_I2S_FLAG_TXE" is undefined
+        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == RESET);
+..\HARDWARE\MAX6675\max_6675.c(82): error:  #20: identifier "RESET" is undefined
+        while(SPI_I2S_GetFlagStatus(SPI1,SPI_I2S_FLAG_TXE) == RESET);
+..\HARDWARE\MAX6675\max_6675.c(85): warning:  #223-D: function "SPI_I2S_SendData" declared implicitly
+        SPI_I2S_SendData(SPI1, 0xff);
+..\HARDWARE\MAX6675\max_6675.c(88): error:  #20: identifier "SPI_I2S_FLAG_RXNE" is undefined
+        while(SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) == RESET);
+..\HARDWARE\MAX6675\max_6675.c(91): warning:  #223-D: function "SPI_I2S_ReceiveData" declared implicitly
+        return SPI_I2S_ReceiveData(SPI1);
+..\HARDWARE\MAX6675\max_6675.c(106): warning:  #223-D: function "SystemInit" declared implicitly
+        SystemInit();
+..\HARDWARE\MAX6675\max_6675.c(114): error:  #20: identifier "GPIOA" is undefined
+                MAX6675_CSL();
+..\HARDWARE\MAX6675\max_6675.c(114): error:  #20: identifier "GPIO_Pin_4" is undefined
+                MAX6675_CSL();
+..\HARDWARE\MAX6675\max_6675.c(130): warning:  #223-D: function "printf" declared implicitly
+                                printf("原始数据是：%04X,  当前温度是：%4.2f。\r\n",i,temprature);
+..\HARDWARE\MAX6675\max_6675.c(134): warning:  #223-D: function "printf" declared implicitly
+                                printf("未检测到热电偶，请检查。\r\n");
+..\HARDWARE\MAX6675\max_6675.c(140): warning:  #223-D: function "printf" declared implicitly
+                        printf("max6675没有数据返回，请检查max6675连接。\r\n");
+..\HARDWARE\MAX6675\max_6675.c: 13 warnings, 28 errors
+"..\OBJ\USART.axf" - 28 Error(s), 19 Warning(s).
+Target not created
