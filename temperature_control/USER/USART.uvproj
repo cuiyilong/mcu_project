@@ -447,6 +447,11 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\DIGITAL_TUBE\digital_tube.c</FilePath>
             </File>
+            <File>
+              <FileName>max_6675.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\MAX6675\max_6675.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -506,6 +511,11 @@
               <FileName>stm32f4xx_usart.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\FWLIB\src\stm32f4xx_usart.c</FilePath>
+            </File>
+            <File>
+              <FileName>stm32f4xx_spi.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\FWLIB\src\stm32f4xx_spi.c</FilePath>
             </File>
           </Files>
         </Group>
