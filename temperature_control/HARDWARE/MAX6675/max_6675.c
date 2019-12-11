@@ -17,10 +17,9 @@
  *            ------------------------------------
 **********************************************************************************/
 
-
-#define 	MAX6675_CS	 		GPIO_Pin_4
-#define 	MAX6675_CSL()		GPIOA->BSRRL = MAX6675_CS;
-#define 	MAX6675_CSH()		GPIOA->BSRRH = MAX6675_CS;
+#define	MAX6675_CS 		PAout(4)  		//W25QXX的片选信号
+#define 	MAX6675_CSL()		MAX6675_CS = 0;
+#define 	MAX6675_CSH()		MAX6675_CS = 1;
 
 /*
  * 函数名：SPI1_Init
@@ -108,54 +107,54 @@ unsigned char MAX6675_ReadByte(void)
  * 输入  ：无
  * 输出  ：无	
  */
- max_6675_main(void)
+ max_6675_init(void)
 {
-	unsigned int t,i;
-	unsigned char c;
-	unsigned char flag;
-	float temprature;
-	/* 配置系统时钟为72M */
-	SystemInit();
-  
-	/* MAX6675 SPI 接口初始化 */
-	SPI_MAX6675_Init();
 
-    printf("\r\n max_6675_main!!!\r\n");
+    /* MAX6675 SPI 接口初始化 */
+    SPI_MAX6675_Init();
 
-	while(1)
-	{
-		MAX6675_CSL();
-		c = MAX6675_ReadByte();
-		i = c;
-		i = i<<8;
-		c = MAX6675_ReadByte();
-		MAX6675_CSH();
-		
-		i = i|((unsigned int)c);			//i是读出来的原始数据
-		flag = i&0x04;						//flag保存了热电偶的连接状态
-		t = i<<1;
-		t = t>>4;
-		temprature = t*0.25;
-		if(i!=0)							//max6675有数据返回
-		{
-			if(flag==0)						//热电偶已连接
-			{
-				printf("原始数据是：%04X,  当前温度是：%4.2f。\r\n",i,temprature);
-			}	
-			else							//热电偶掉线
-			{
-				printf("未检测到热电偶，请检查。\r\n");
-			}
-		
-		}
-		else								//max6675没有数据返回
-		{
-			printf("max6675没有数据返回，请检查max6675连接。\r\n");
-		}
-		//for(i=0;i<0x2fffff;i++);			//max6675的转换时间是0.2秒左右，所以两次转换间隔不要太近
-            delay_ms(200);
-    }
+    printf("\r\n max_6675_init!!!\r\n");
 }
 
 
+float max_6675_temp_detect(void)
+{
+    unsigned int t,i;
+    unsigned char c;
+    unsigned char flag;
+    float temprature = -1;
 
+    MAX6675_CSL();
+    c = MAX6675_ReadByte();
+    i = c;
+    i = i<<8;
+    c = MAX6675_ReadByte();
+    MAX6675_CSH();
+
+    i = i|((unsigned int)c);			//i是读出来的原始数据
+    flag = i&0x04;						//flag保存了热电偶的连接状态
+    t = i<<1;
+    t = t>>4;
+    temprature = t*0.25;
+    if(i!=0)							//max6675有数据返回
+    {
+    if(flag==0)						//热电偶已连接
+    {
+        printf("原始数据是：%04X,  当前温度是：%4.2f。\r\n",i,temprature);
+    }	
+    else							//热电偶掉线
+    {
+        printf("未检测到热电偶，请检查。\r\n");
+        return -1;
+    }
+
+    }
+    else								//max6675没有数据返回
+    {
+        printf("max6675没有数据返回，请检查max6675连接。\r\n");
+        return -1;
+    }
+    //max6675的转换时间是0.2秒左右，所以两次转换间隔不要太近    
+    delay_ms(200);
+    return temprature;
+}

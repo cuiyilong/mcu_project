@@ -48,8 +48,8 @@ void digital_tube_display_one(u32 digit_select, u32 display_digit)
 {
     assert_param(display_digit < 10);
  
-    printf("\r\n digit_select %d   display_digit %d   num_table[display_digit] 0x%02x \r\n",
-                    digit_select, display_digit, num_table[display_digit]);
+    //printf("\r\n digit_select %d   display_digit %d   num_table[display_digit] 0x%02x \r\n",
+                    //digit_select, display_digit, num_table[display_digit]);
     digital_tube_display_bit(num_table[display_digit]);
 
     GPIO_SetBits(GPIOD, DISPLY_DIGS);

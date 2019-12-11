@@ -6,55 +6,67 @@
 #include "key.h"
 
 u32 display_num = 1234;
+float display_temprature = 20.00;
 int main(void)
 { 
  
-	u8 t;
-	u8 len;	
-	u16 times=0;  
-	NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
-	delay_init(168);		//延时初始化 
-	uart_init(115200);	//串口初始化波特率为115200
-	LED_Init();		  		//初始化与LED连接的硬件接口  
-	digital_tube_Init();
+    u8 t;
+    u8 len;	
+    u16 times=0;  
 
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);//设置系统中断优先级分组2
+    delay_init(168);		//延时初始化 
+    uart_init(115200);	//串口初始化波特率为115200
+    LED_Init();		  		//初始化与LED连接的硬件接口  
+    digital_tube_Init();
 
-        max_6675_main();
-	while(1)
-	{
-	#if 0
-		if(USART_RX_STA&0x8000)
-		{					   
-			len=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
-			printf("\r\n您发送的消息为:\r\n");
-			for(t=0;t<len;t++)
-			{
-				USART_SendData(USART1, USART_RX_BUF[t]);         //向串口1发送数据
-				while(USART_GetFlagStatus(USART1,USART_FLAG_TC)!=SET);//等待发送结束
-			}
-			printf("\r\n\r\n");//插入换行
-			USART_RX_STA=0;
-		}else
-		{
-			times++;
-			if(times%5000==0)
-			{
-				printf("\r\n5000 *10ms\r\n");
-			}
-			if(times%200==0)printf("请输入数据,以回车键结束\r\n");  
-			if(times%30==0)LED0=!LED0;//闪烁LED,提示系统正在运行.
-			delay_ms(10);   
-		}
+    max_6675_init();
+
+    while(1)
+    {
+#if 0
+    	if(USART_RX_STA&0x8000)
+    	{					   
+    		len=USART_RX_STA&0x3fff;//得到此次接收到的数据长度
+    		printf("\r\n您发送的消息为:\r\n");
+    		for(t=0;t<len;t++)
+    		{
+    			USART_SendData(USART1, USART_RX_BUF[t]);         //向串口1发送数据
+    			while(USART_GetFlagStatus(USART1,USART_FLAG_TC)!=SET);//等待发送结束
+    		}
+    		printf("\r\n\r\n");//插入换行
+    		USART_RX_STA=0;
+    	}else
+    	{
+    		times++;
+    		if(times%5000==0)
+    		{
+    			printf("\r\n5000 *10ms\r\n");
+    		}
+    		if(times%200==0)printf("请输入数据,以回车键结束\r\n");  
+    		if(times%30==0)LED0=!LED0;//闪烁LED,提示系统正在运行.
+    		delay_ms(10);   
+    	}
         #endif
-            /* dsiplay in d-tube*/
-            digital_tube_display(display_num);
-            printf("\r\n display_num:%d\r\n", display_num);
+        if(times%5000==0) {
+            printf("\r\n display_temprature before:%f\r\n", display_temprature);
+            display_temprature = max_6675_temp_detect();
+            printf("\r\n display_temprature after:%f\r\n", display_temprature);
+            times = 0;
+        }
+        times++;
 
-            //display_num++;
-            if(display_num > 9999)
-                display_num=0;
+        
+        
+        /* dsiplay in d-tube*/
+        digital_tube_display(display_num);
+        printf("\r\n display_num:%d\r\n", display_num);
 
-            //delay_ms(1); 
-	}
+        //display_num++;
+        //if(display_num > 9999)
+           // display_num=0;
+
+        //delay_ms(1); 
+    }
 }
 
