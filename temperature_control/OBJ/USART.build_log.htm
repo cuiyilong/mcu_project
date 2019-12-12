@@ -8,10 +8,23 @@ Project File Date:  12/10/2019
 
 <h2>Output:</h2>
 Build target 'USART'
+compiling main.c...
+main.c(22): warning:  #223-D: function "digital_tube_Init" declared implicitly
+      digital_tube_Init();
+main.c(24): warning:  #223-D: function "max_6675_init" declared implicitly
+      max_6675_init();
+main.c(62): warning:  #223-D: function "digital_tube_display" declared implicitly
+          digital_tube_display(f_temprature);
+main.c(14): warning:  #177-D: variable "t" was declared but never referenced
+      u8 t;
+main.c(15): warning:  #177-D: variable "len" was declared but never referenced
+      u8 len;   
+main.c: 5 warnings, 0 errors
+compiling digital_tube.c...
 linking...
-Program Size: Code=12814 RO-data=658 RW-data=80 ZI-data=1832  
+Program Size: Code=13034 RO-data=754 RW-data=76 ZI-data=1836  
 FromELF: creating hex file...
-"..\OBJ\USART.axf" - 0 Error(s), 0 Warning(s).
+"..\OBJ\USART.axf" - 0 Error(s), 5 Warning(s).
 Load "..\\OBJ\\USART.axf" 
 Set JLink Project File to "C:\Users\cuiyilong\work\code\mcu_project\temperature_control\USER\JLinkSettings.ini"
 * JLink Info: Device "STM32F407ZG" selected (1024 KB flash, 128 KB RAM).
@@ -35,7 +48,7 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407ZG
-VTarget = 3.283V
+VTarget = 3.279V
 State of Pins: 
 TCK: 0, TDI: 1, TDO: 1, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
@@ -47,19 +60,14 @@ Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-s.ini"
-* JLink Info: Device "STM32F407ZG" selected (1024 KB flash, 128 KB RAM).
+oints:          4
+JTAG speed: 4000 kHz
  
-JLink info:
-------------
-DLL: V4.80g, compiled Feb 13 2014 20:50:02
-Firmware: J-Link V9 compiled Mar 29 2018 17:46:13
-Hardware: V9.40
-S/N : 59425868 
-Feature(s) : RDI, GDB, FlashDL, FlashBP, JFlash, RDDI 
- 
-* JLink Info: Found SWD-DP with ID 0x2BA01477
-* JLink Info: Found SWD-DP with ID 0x2BA01477
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+P with ID 0x2BA01477
 * JLink Info: Found Cortex-M4 r0p1, Little endian.
 * JLink Info: FPUnit: 6 code (BP) slots and 2 literal slots
 * JLink Info: TPIU fitted.
@@ -69,19 +77,12 @@ ROMTableAddr = 0xE00FF003
 Target info:
 ------------
 Device: STM32F407ZG
-VTarget = 3.282V
+VTarget = 3.275V
 State of Pins: 
 TCK: 0, TDI: 1, TDO: 1, TMS: 1, TRES: 1, TRST: 1
 Hardware-Breakpoints: 6
 Software-Breakpoints: 8192
 Watchpoints:          4
-JTAG speed: 4000 kHz
- 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-  4
 JTAG speed: 4000 kHz
  
 Erase Done.

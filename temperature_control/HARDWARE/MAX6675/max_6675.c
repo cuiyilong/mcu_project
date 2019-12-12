@@ -116,13 +116,13 @@ unsigned char MAX6675_ReadByte(void)
     printf("\r\n max_6675_init!!!\r\n");
 }
 
-
+float f_temprature = 0;
 float max_6675_temp_detect(void)
 {
     unsigned int t,i;
     unsigned char c;
     unsigned char flag;
-    float temprature = -1;
+    float temprature = 0;
 
     MAX6675_CSL();
     c = MAX6675_ReadByte();
@@ -141,18 +141,20 @@ float max_6675_temp_detect(void)
     if(flag==0)						//热电偶已连接
     {
         printf("原始数据是：%04X,  当前温度是：%4.2f。\r\n",i,temprature);
+        f_temprature = temprature;
+        return temprature;
     }	
     else							//热电偶掉线
     {
         printf("未检测到热电偶，请检查。\r\n");
-        return -1;
+        return 0;
     }
 
     }
     else								//max6675没有数据返回
     {
         printf("max6675没有数据返回，请检查max6675连接。\r\n");
-        return -1;
+        return 0;
     }
     //max6675的转换时间是0.2秒左右，所以两次转换间隔不要太近    
     delay_ms(200);

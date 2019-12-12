@@ -44,27 +44,51 @@ void digital_tube_display_bit(u32 digit_bits)
        
 }
 
-void digital_tube_display_one(u32 digit_select, u32 display_digit)
+void digital_tube_display_one(u32 digit_select, u32 display_digit, u32 display_decimal)
 {
+    u32 digit_bits = 0;
     assert_param(display_digit < 10);
  
-    //printf("\r\n digit_select %d   display_digit %d   num_table[display_digit] 0x%02x \r\n",
-                    //digit_select, display_digit, num_table[display_digit]);
-    digital_tube_display_bit(num_table[display_digit]);
+    printf("\r\n digit_select %d   display_digit %d   num_table[display_digit] 0x%02x  display_decimal %d\r\n",
+                    digit_select, display_digit, num_table[display_digit], display_decimal);
+    digit_bits = num_table[display_digit];
+    if (display_decimal)
+        digit_bits |= BIT(7);
+    digital_tube_display_bit(digit_bits);
 
     GPIO_SetBits(GPIOD, DISPLY_DIGS);
 
     GPIO_ResetBits(GPIOD, BIT(digit_select_table[digit_select]));
 }
 
-void digital_tube_display(u32 dis_num)
+void digital_tube_display(float dis_num)
 {
     u32 i;
     u32 display_digit;
+    u32 display_decimal[DISPLAY_DIGITS] = {0};
 
+    u32 dis_num_multy = dis_num;
+
+    if(dis_num > 9999) {
+        dis_num = 9999;
+    } else if(dis_num >= 100 && dis_num < 1000) {
+        display_decimal[1] = 1;
+        dis_num_multy = dis_num *10;
+
+    } else if(dis_num >= 10 && dis_num < 100) {
+        display_decimal[2] = 1;
+        dis_num_multy = dis_num *100;
+
+    } else if(dis_num >= 0 && dis_num < 10) {
+        display_decimal[3] = 1;
+        dis_num_multy = dis_num *1000;
+    }
+
+    printf("\r\n dis_num_multy %d  dis_num %f  \r\n", dis_num_multy,dis_num);
+        
     for(i = 0; i < DISPLAY_DIGITS; i++) {
-            display_digit = dis_num%10;
-            dis_num /= 10;
-            digital_tube_display_one(i+1, display_digit);
+            display_digit = dis_num_multy%10;
+            dis_num_multy /= 10;
+            digital_tube_display_one(i+1, display_digit, display_decimal[i]);
     }
 }

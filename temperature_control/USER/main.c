@@ -6,7 +6,8 @@
 #include "key.h"
 
 u32 display_num = 1234;
-float display_temprature = 20.00;
+float display_temprature = 20;
+extern float f_temprature;
 int main(void)
 { 
  
@@ -49,9 +50,8 @@ int main(void)
     	}
         #endif
         if(times%5000==0) {
-            printf("\r\n display_temprature before:%f\r\n", display_temprature);
-            display_temprature = max_6675_temp_detect();
-            printf("\r\n display_temprature after:%f\r\n", display_temprature);
+
+            printf("\r\n  max_6675_temp_detect: %4.2f  \r\n", f_temprature);
             times = 0;
         }
         times++;
@@ -59,8 +59,8 @@ int main(void)
         
         
         /* dsiplay in d-tube*/
-        digital_tube_display(display_num);
-        printf("\r\n display_num:%d\r\n", display_num);
+        digital_tube_display(f_temprature);
+        //printf("\r\n display_num:%d\r\n", display_num);
 
         //display_num++;
         //if(display_num > 9999)
