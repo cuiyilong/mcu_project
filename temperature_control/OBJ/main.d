@@ -41,3 +41,5 @@
 ..\obj\main.o: ..\HARDWARE\LED\led.h
 ..\obj\main.o: ..\HARDWARE\BEEP\beep.h
 ..\obj\main.o: ..\HARDWARE\KEY\key.h
+..\obj\main.o: C:\work\software_tool_package\mdk5\ARM\ARMCC\bin\..\include\stdlib.h
+..\obj\main.o: C:\work\software_tool_package\mdk5\ARM\ARMCC\bin\..\include\string.h

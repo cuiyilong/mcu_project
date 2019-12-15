@@ -3,6 +3,8 @@
 #include "delay.h"
 #include "usart.h"
 
+
+
 //共阴数码管对应的编码表
 
 //pin map
@@ -14,7 +16,7 @@ u8 num_table[16]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f};
 //PA0-PA7----A-G-D0
 #define DIGIT_BIT_NUM 8
 #define DISPLAY_DIGITS 4
-#define DISPLY_BITS (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 |GPIO_Pin_5 | GPIO_Pin_6)
+#define DISPLY_BITS (GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 |GPIO_Pin_5 | GPIO_Pin_6 | GPIO_Pin_7)
 #define DISPLY_DIGS (GPIO_Pin_9 | GPIO_Pin_10 | GPIO_Pin_11 | GPIO_Pin_12)
 
 #define BIT(l) (1<< l)
@@ -61,13 +63,18 @@ void digital_tube_display_one(u32 digit_select, u32 display_digit, u32 display_d
     GPIO_ResetBits(GPIOD, BIT(digit_select_table[digit_select]));
 }
 
-void digital_tube_display(float dis_num)
+float test_float = 1.1;
+extern float  f_temprature;
+void digital_tube_display(float dis_num1)
 {
     u32 i;
     u32 display_digit;
     u32 display_decimal[DISPLAY_DIGITS] = {0};
 
+    
+    float dis_num = f_temprature;
     u32 dis_num_multy = dis_num;
+
 
     if(dis_num > 9999) {
         dis_num = 9999;
@@ -84,7 +91,12 @@ void digital_tube_display(float dis_num)
         dis_num_multy = dis_num *1000;
     }
 
-    printf("\r\n dis_num_multy %d  dis_num %f  \r\n", dis_num_multy,dis_num);
+    //printf("\r\n 0 dis_num_multy %d  dis_num %4.2f  test_float %4.2f\r\n", dis_num_multy,dis_num,test_float);
+    
+    //printf("\r\n 1 dis_num_multy %d  dis_num %2.2f  test_float %2.2f\r\n", dis_num_multy,dis_num,test_float);
+    test_float = dis_num;
+
+    printf("\r\n 2 dis_num_multy %d  dis_num %2.2f  test_float %2.2f\r\n", dis_num_multy,dis_num,test_float);
         
     for(i = 0; i < DISPLAY_DIGITS; i++) {
             display_digit = dis_num_multy%10;

@@ -5,6 +5,11 @@
 #include "beep.h"
 #include "key.h"
 
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 u32 display_num = 1234;
 float display_temprature = 20;
 extern float f_temprature;
@@ -52,6 +57,8 @@ int main(void)
         if(times%5000==0) {
 
             printf("\r\n  max_6675_temp_detect: %4.2f  \r\n", f_temprature);
+               max_6675_temp_detect();
+        digital_tube_display(f_temprature);
             times = 0;
         }
         times++;
@@ -59,14 +66,17 @@ int main(void)
         
         
         /* dsiplay in d-tube*/
-        digital_tube_display(f_temprature);
+        //printf("\r\n  max_6675_temp_detect: %4.2f  1\r\n", f_temprature);
+        //max_6675_temp_detect();
+        //digital_tube_display(f_temprature);
+        //printf("\r\n  max_6675_temp_detect: %4.2f  2\r\n", f_temprature);
         //printf("\r\n display_num:%d\r\n", display_num);
 
         //display_num++;
         //if(display_num > 9999)
            // display_num=0;
 
-        //delay_ms(1); 
+        //delay_ms(1000); 
     }
 }
 

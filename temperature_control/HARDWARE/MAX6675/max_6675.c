@@ -3,6 +3,7 @@
 #include "delay.h"
 #include "usart.h"
 
+
 /*********************************************************************************
  * 文件名  ：main.c
  * 描述    ：通过stm32的spi1读取max6675的温度值，并通过uart1发送出来
@@ -18,8 +19,8 @@
 **********************************************************************************/
 
 #define	MAX6675_CS 		PAout(4)  		//W25QXX的片选信号
-#define 	MAX6675_CSL()		MAX6675_CS = 0;
-#define 	MAX6675_CSH()		MAX6675_CS = 1;
+#define 	MAX6675_CSL()		MAX6675_CS = 0
+#define 	MAX6675_CSH()		MAX6675_CS = 1
 
 /*
  * 函数名：SPI1_Init
@@ -116,7 +117,7 @@ unsigned char MAX6675_ReadByte(void)
     printf("\r\n max_6675_init!!!\r\n");
 }
 
-float f_temprature = 0;
+float  f_temprature = 0;
 float max_6675_temp_detect(void)
 {
     unsigned int t,i;
@@ -157,6 +158,6 @@ float max_6675_temp_detect(void)
         return 0;
     }
     //max6675的转换时间是0.2秒左右，所以两次转换间隔不要太近    
-    delay_ms(200);
+    //delay_ms(200);
     return temprature;
 }
